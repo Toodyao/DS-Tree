@@ -1,11 +1,15 @@
 #include <iostream>
-#include "my_stack.hpp"
+#include <cstdio>
+#include "binary_tree.hpp"
 using namespace std;
 
 int main() {
-	Mystack<int> s;
-	s.push(1);
-	s.print();
+	freopen("input.txt", "r", stdin);
+	BinaryTree<double> t;
+	string s;
+	cin >> s;
+	t.build_tree_from_string(s);
+
 
 	return 0;
 }
