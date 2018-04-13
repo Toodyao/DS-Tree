@@ -21,6 +21,8 @@ public:
 
 	inline void add_left(TreeNode<T> *t);
 	inline void add_right(TreeNode<T> *t);
+	inline void add_left(T d);
+	inline void add_right(T d);
 
 	inline T get_data();
 	inline void set_data(T d);
@@ -70,6 +72,16 @@ void TreeNode<T>::add_left(TreeNode<T> *t) {
 template<typename T>
 void TreeNode<T>::add_right(TreeNode<T> *t) {
 	rchild = t;
+}
+
+template<typename T>
+void TreeNode<T>::add_left(T d) {
+	lchild = new TreeNode(d);
+}
+
+template<typename T>
+void TreeNode<T>::add_right(T d) {
+	rchild = new TreeNode(d);
 }
 
 
