@@ -57,8 +57,8 @@ void BinaryTree<T>::in_order(TreeNode<T>* t) {
 	if (t == nullptr)
 		return;
 	else {
-		std::cout << t->get_data() << std::endl;
 		in_order(t->left_child());
+		std::cout << t->get_data() << std::endl;
 		in_order(t->right_child());
 	}
 }
@@ -68,9 +68,9 @@ void BinaryTree<T>::post_order(TreeNode<T>* t) {
 	if (t == nullptr)
 		return;
 	else {
-		std::cout << t->get_data() << std::endl;
 		post_order(t->left_child());
 		post_order(t->right_child());
+		std::cout << t->get_data() << std::endl;
 	}
 }
 

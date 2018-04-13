@@ -16,8 +16,8 @@ public:
 	TreeNode(T d, TreeNode<T> *l, TreeNode<T> *r, TreeNode<T> *p);
 
 //	inline TreeNode<T> *root();
-	inline TreeNode<T> *left_child();
-	inline TreeNode<T> *right_child();
+	inline TreeNode<T> * left_child();
+	inline TreeNode<T> * right_child();
 
 	inline void add_left(TreeNode<T> *t);
 	inline void add_right(TreeNode<T> *t);
@@ -59,7 +59,7 @@ T TreeNode<T>::get_data() {
 
 template<typename T>
 void TreeNode<T>::set_data(T d) {
-	d = data;
+	data = d;
 }
 
 template<typename T>
