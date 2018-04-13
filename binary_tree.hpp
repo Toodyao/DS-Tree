@@ -18,6 +18,8 @@ public:
 	void pre_order(TreeNode<T>* t);
 	void in_order(TreeNode<T>* t);
 	void post_order(TreeNode<T>* t);
+
+	void delete_subtree(TreeNode<T> *t);
 };
 
 template<typename T>
@@ -27,7 +29,7 @@ BinaryTree<T>::BinaryTree() {
 
 template<typename T>
 BinaryTree<T>::~BinaryTree() {
-
+	delete_subtree(root_node);
 }
 
 template<typename T>
@@ -71,6 +73,17 @@ void BinaryTree<T>::post_order(TreeNode<T>* t) {
 		post_order(t->left_child());
 		post_order(t->right_child());
 		std::cout << t->get_data() << std::endl;
+	}
+}
+
+template<typename T>
+void BinaryTree<T>::delete_subtree(TreeNode<T> *t) { // post order delete
+	if (t != nullptr) {
+		delete_subtree(t->left_child());
+		delete_subtree(t->right_child());
+//		std::cout << "deleted " << t->get_data() << std::endl;
+		delete t;
+		return;
 	}
 }
 

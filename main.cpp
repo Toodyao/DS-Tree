@@ -8,12 +8,14 @@ int main() {
 	BinaryTree<int> t;
 	string s;
 
-	TreeNode<int> temp(5);
-	TreeNode<int> temp2(4);
+	TreeNode<int> temp(2);
+	TreeNode<int> temp2(3);
 	t.root()->set_data(1);
 	t.root()->add_left(&temp);
 	t.root()->add_right(&temp2);
+	temp.add_right(5);
 	t.post_order(t.root());
+//	t.delete_subtree(t.root());
 
 
 	return 0;
