@@ -3,12 +3,13 @@
 
 template <typename T>
 class TreeNode {
-public:
+private:
 	T data;
 	TreeNode<T> *lchild;
 	TreeNode<T> *rchild;
 	TreeNode<T> *parent;
 
+public:
 	TreeNode();
 	explicit TreeNode(T d);
 	TreeNode(T d, TreeNode<T> *l, TreeNode<T> *r);
@@ -20,6 +21,9 @@ public:
 
 	inline void add_left(TreeNode<T> *t);
 	inline void add_right(TreeNode<T> *t);
+
+	inline T get_data();
+	inline void set_data(T d);
 };
 
 template<typename T>
@@ -46,6 +50,16 @@ TreeNode<T> * TreeNode<T>::left_child() {
 template<typename T>
 TreeNode<T> * TreeNode<T>::right_child() {
 	return rchild;
+}
+
+template<typename T>
+T TreeNode<T>::get_data() {
+	return data;
+}
+
+template<typename T>
+void TreeNode<T>::set_data(T d) {
+	d = data;
 }
 
 template<typename T>
