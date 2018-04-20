@@ -3,6 +3,7 @@
 
 #include "tree_node.hpp"
 #include <iostream>
+#include <queue>
 
 template <typename T>
 class BinaryTree : public TreeNode<T> {
@@ -10,6 +11,7 @@ private:
 	TreeNode<T> *root_node;
 public:
 	BinaryTree();
+	BinaryTree(TreeNode<T> * root);
 	~BinaryTree();
 
 	inline TreeNode<T> *root();
@@ -18,6 +20,7 @@ public:
 	void pre_order(TreeNode<T>* t);
 	void in_order(TreeNode<T>* t);
 	void post_order(TreeNode<T>* t);
+	void level_order();
 
 	void delete_subtree(TreeNode<T> *t);
 };
@@ -25,6 +28,11 @@ public:
 template<typename T>
 BinaryTree<T>::BinaryTree() {
 	root_node = new TreeNode<T>;
+}
+
+template<typename T>
+BinaryTree<T>::BinaryTree(TreeNode<T> *root) {
+	root_node = root;
 }
 
 template<typename T>
@@ -74,6 +82,22 @@ void BinaryTree<T>::post_order(TreeNode<T>* t) {
 		post_order(t->right_child());
 		std::cout << t->get_data() << std::endl;
 	}
+}
+
+template<typename T>
+void BinaryTree<T>::level_order() {
+	std::queue<TreeNode<T>* > q;
+	q.push(root_node);
+	while (!q.empty()) {
+		TreeNode<T>* temp = q.front();
+		q.pop();
+		if (temp == nullptr)
+			continue;
+		std::cout << temp->get_data() << " ";
+		q.push(temp->left_child());
+		q.push(temp->right_child());
+	}
+	std::cout << std::endl;
 }
 
 template<typename T>

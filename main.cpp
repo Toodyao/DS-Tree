@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <stack>
 #include <cmath>
+#include <string>
 #include "binary_tree.hpp"
 using namespace std;
 
@@ -11,8 +12,8 @@ bool is_digit(char c) {
 
 bool is_op(char c) {
 	return (c == '+' || c == '-'
-		|| c == '*' || c == '/'
-		|| c == '(' || c == ')');
+			|| c == '*' || c == '/'
+			|| c == '(' || c == ')');
 }
 
 int priority(char c) {
@@ -34,7 +35,7 @@ double read_number(const string &s, size_t &i) {
 		while (is_digit(s[i])) {
 			ans = ans * 10 + s[i] - '0';
 			i++;
-			point++; // remeber point pos
+			point++; // remember point pos
 		}
 		ans /= pow(10, point);
 	}
@@ -50,7 +51,7 @@ string infix_to_suffix(const string &s) {
 			continue;
 		else if (is_digit(s[i])) {
 			double read_num = read_number(s, i);
-			if ((int)read_num == read_num) // if value is int 
+			if ((int)read_num == read_num) // if value is int
 				num += to_string((int)read_num);
 			else
 				num += to_string(read_num);
@@ -72,7 +73,7 @@ string infix_to_suffix(const string &s) {
 				op.pop(); // pop '('
 			}
 			else if (op.empty() || op.top() == '(' || s[i] == '(' ||
-				priority(s[i]) > priority(op.top()))
+					 priority(s[i]) > priority(op.top()))
 				op.push(s[i]);
 			else
 			{	// pop until meets '(' , or op.empty, or priorty meets
@@ -137,26 +138,29 @@ TreeNode<string> * suffix_to_exp_tree(string suffix) {
 	stack< TreeNode<string>* > s;
 	for (size_t i = 0; i < suffix.size(); i++) {
 		if (is_digit(suffix[i])) {
-			TreeNode<string> tn(string(1, suffix[i]));
-			s.push(&(tn));
+			TreeNode<string>* tn = new TreeNode<string>(string(1, suffix[i]));
+			s.push(tn);
 		}
 		else if (is_op(suffix[i])) {
-			TreeNode<string> *temp = new TreeNode<string> (string(1, suffix[i]));
-			temp->add_left(s.top());
-			s.pop();
+			TreeNode<string> *temp = new TreeNode<string>(string(1, suffix[i]));
 			temp->add_right(s.top());
 			s.pop();
+			temp->add_left(s.top());
+			s.pop();
+			s.push(temp);
 		}
 	}
 	return s.top();
 }
 
 int main() {
-	freopen("input.txt", "r", stdin);
+	//	freopen("input.txt", "r", stdin);
 	string infix_exp, suffix_exp;
-	cin >> infix_exp;
+	getline(cin, infix_exp);
 	suffix_exp = infix_to_suffix(infix_exp);
-
+	TreeNode<string>* exp_tree_root = suffix_to_exp_tree(suffix_exp);
+	BinaryTree<string> bt(exp_tree_root);
+	bt.level_order();
 
 
 	return 0;
