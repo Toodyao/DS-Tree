@@ -9,9 +9,11 @@ template <typename T>
 class BinaryTree : public TreeNode<T> {
 private:
 	TreeNode<T> *root_node;
+	std::queue<std::pair<TreeNode<T> *, int> >  to_full_binary_tree(TreeNode<T>* root);
+	int max(int a, int b);
 public:
 	BinaryTree();
-	BinaryTree(TreeNode<T> * root);
+	explicit BinaryTree(TreeNode<T> * root);
 	~BinaryTree();
 
 	inline TreeNode<T> *root();
@@ -21,6 +23,9 @@ public:
 	void in_order(TreeNode<T>* t);
 	void post_order(TreeNode<T>* t);
 	void level_order();
+	void print_like_tree();
+
+	int get_tree_height(TreeNode<T> *);
 
 	void delete_subtree(TreeNode<T> *t);
 };
@@ -38,6 +43,11 @@ BinaryTree<T>::BinaryTree(TreeNode<T> *root) {
 template<typename T>
 BinaryTree<T>::~BinaryTree() {
 	delete_subtree(root_node);
+}
+
+template<typename T>
+int BinaryTree<T>::max(const int a, const int b) {
+	return a > b ? a : b;
 }
 
 template<typename T>
@@ -101,6 +111,13 @@ void BinaryTree<T>::level_order() {
 }
 
 template<typename T>
+int BinaryTree<T>::get_tree_height(TreeNode<T> *root) {
+	if (root == nullptr)
+		return 0;
+	return max(get_tree_height(root->left_child())+1, get_tree_height(root->right_child())+1);
+}
+
+template<typename T>
 void BinaryTree<T>::delete_subtree(TreeNode<T> *t) { // post order delete
 	if (t != nullptr) {
 		delete_subtree(t->left_child());
@@ -109,6 +126,51 @@ void BinaryTree<T>::delete_subtree(TreeNode<T> *t) { // post order delete
 		delete t;
 		return;
 	}
+}
+
+template<typename T>
+void BinaryTree<T>::print_like_tree() {
+	typedef std::pair<TreeNode<T>*, int> P; // the int value stores current tree height
+	std::queue<P> q = to_full_binary_tree(root_node);
+	int newline = 0;
+	while (!q.empty()) {
+		P temp = q.front();
+		q.pop();
+		if (temp.second != newline) {
+			std::cout << std::endl;
+			newline = temp.second;
+		}
+		if (temp.first == nullptr)
+			std::cout << "#" << " ";
+		else
+			std::cout << temp.first->get_data() << " ";
+
+	}
+}
+
+template<typename T>
+std::queue<std::pair<TreeNode<T> *, int> > BinaryTree<T>::to_full_binary_tree(TreeNode<T> *root) {
+	typedef TreeNode<T>* TN;
+	typedef std::pair<TN, int> P; // the int value stores current tree height
+	std::queue<P> ans, q;
+	int height = get_tree_height(root_node);
+	q.push(P(root_node, 1)); // tree height starts at 1
+	while (!q.empty()) {
+		P temp = q.front();
+		q.pop();
+		ans.push(temp);
+		if (temp.second >= height) {
+			continue;
+		}
+		if (temp.first == nullptr) {
+			q.push(P(new TreeNode<std::string> ("#"), temp.second+1));
+			q.push(P(new TreeNode<std::string> ("#"), temp.second+1));
+			continue;
+		}
+		q.push(P(temp.first->left_child(),  temp.second+1));
+		q.push(P(temp.first->right_child(), temp.second+1));
+	}
+	return ans;
 }
 
 

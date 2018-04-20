@@ -154,13 +154,17 @@ TreeNode<string> * suffix_to_exp_tree(string suffix) {
 }
 
 int main() {
-	//	freopen("input.txt", "r", stdin);
+//	freopen("input.txt", "r", stdin);
 	string infix_exp, suffix_exp;
 	getline(cin, infix_exp);
 	suffix_exp = infix_to_suffix(infix_exp);
 	TreeNode<string>* exp_tree_root = suffix_to_exp_tree(suffix_exp);
 	BinaryTree<string> bt(exp_tree_root);
 	bt.level_order();
+	bt.print_like_tree();
+//	cout << bt.get_tree_height(exp_tree_root) << endl;
+
+
 
 
 	return 0;
