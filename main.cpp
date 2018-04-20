@@ -4,6 +4,7 @@
 #include <cmath>
 #include <string>
 #include "binary_tree.hpp"
+#include "express_tree.hpp"
 using namespace std;
 
 bool is_digit(char c) {
@@ -161,7 +162,9 @@ int main() {
 	TreeNode<string>* exp_tree_root = suffix_to_exp_tree(suffix_exp);
 	BinaryTree<string> bt(exp_tree_root);
 	bt.level_order();
-	bt.print_like_tree();
+	ExpressTree<string> et(exp_tree_root);
+	et.print_like_tree();
+
 //	cout << bt.get_tree_height(exp_tree_root) << endl;
 
 
