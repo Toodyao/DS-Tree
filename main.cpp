@@ -157,7 +157,8 @@ TreeNode<string> * suffix_to_exp_tree(string suffix) {
 int main() {
 //	freopen("input.txt", "r", stdin);
 	string infix_exp, suffix_exp;
-	getline(cin, infix_exp);
+	//getline(cin, infix_exp);
+	infix_exp = "(1+2*3) + ((4*5 + 6)*7)";
 	suffix_exp = infix_to_suffix(infix_exp);
 	TreeNode<string>* exp_tree_root = suffix_to_exp_tree(suffix_exp);
 	BinaryTree<string> bt(exp_tree_root);
