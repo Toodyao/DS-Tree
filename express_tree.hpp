@@ -43,22 +43,28 @@ void ExpressTree<T>::print_like_tree() {
 	typedef std::pair<TreeNode<T>*, int> P; // the int value stores current tree height
 	std::queue<P> q = to_full_binary_tree(exp_tree_node);
 	int height = BinaryTree<T>::get_tree_height(exp_tree_node);
-	int mid_pos = (1 << height - 1);
+	int mid_pos = ((1 << height - 1) - 1);
 	int newline = 0;
 	while (!q.empty()) {
 		P temp = q.front();
 		q.pop();
+
 		if (temp.second != newline) { // start a new line
-			std::cout << std::endl;
+			std::cout << std::endl << std::endl;
 			// fill up with spaces
-			for (int i = 0; i < mid_pos-(1<<newline); i++)
+			for (int i = 0; i < mid_pos/(1<<newline); i++)
 				std::cout << " ";
 			newline = temp.second;
 		}
+
 		if (temp.first == nullptr)
-			std::cout << "#" << " ";
+			std::cout << " "; // use "#" if you want to print a full binary tree with null node
 		else
-			std::cout << temp.first->get_data() << " ";
+			std::cout << temp.first->get_data();
+
+		// spaces between nodes in same level
+		for (int i = 0; i < mid_pos/(1<<(newline-2)); i++)
+			std::cout << " ";
 	}
 	std::cout << std::endl;
 }
@@ -78,8 +84,10 @@ std::queue<std::pair<TreeNode<T> *, int> > ExpressTree<T>::to_full_binary_tree(T
 			continue;
 		}
 		if (temp.first == nullptr) {
-			q.push(P(new TreeNode<std::string> ("#"), temp.second+1)); // memory leak (maybe)
-			q.push(P(new TreeNode<std::string> ("#"), temp.second+1)); // memory leak (maybe)
+			// memory leak (maybe)
+			// use "#" if you want to print a full binary tree with null node
+			q.push(P(new TreeNode<std::string> (" "), temp.second+1));
+			q.push(P(new TreeNode<std::string> (" "), temp.second+1));
 			continue;
 		}
 		q.push(P(temp.first->left_child(),  temp.second+1));
