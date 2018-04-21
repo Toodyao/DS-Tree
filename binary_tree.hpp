@@ -2,7 +2,7 @@
 #define DS_TREE_BINARY_TREE_HPP
 
 #include "tree_node.hpp"
-#include <iostream>
+#include <ostream>
 #include <queue>
 
 template <typename T>
