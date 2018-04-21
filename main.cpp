@@ -3,7 +3,6 @@
 #include <stack>
 #include <cmath>
 #include <string>
-#include "binary_tree.hpp"
 #include "express_tree.hpp"
 #include "expression_calculate.h"
 using namespace std;
