@@ -139,7 +139,13 @@ TreeNode<string> * suffix_to_exp_tree(string suffix) {
 	stack< TreeNode<string>* > s;
 	for (size_t i = 0; i < suffix.size(); i++) {
 		if (is_digit(suffix[i])) {
-			TreeNode<string>* tn = new TreeNode<string>(string(1, suffix[i]));
+			double temp = read_number(suffix, i);
+			string temp_s;
+			if ((int)temp == temp)
+				temp_s = to_string((int)temp);
+			else
+				temp_s = to_string(temp);
+			TreeNode<string>* tn = new TreeNode<string>(temp_s);
 			s.push(tn);
 		}
 		else if (is_op(suffix[i])) {
@@ -158,8 +164,9 @@ int main() {
 //	freopen("input.txt", "r", stdin);
 	string infix_exp, suffix_exp;
 	//getline(cin, infix_exp);
-	infix_exp = "(1+2*3) + ((4*5 + 6)*7)";
+	infix_exp = "(11+22*3) + ((44*55 + 66)*77)";
 	suffix_exp = infix_to_suffix(infix_exp);
+	cout << suffix_exp << endl;
 	TreeNode<string>* exp_tree_root = suffix_to_exp_tree(suffix_exp);
 	BinaryTree<string> bt(exp_tree_root);
 	bt.level_order();
