@@ -8,4 +8,4 @@ include_directories(
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(DS_Tree main.cpp tree_node.hpp binary_tree.hpp express_tree.hpp)
+add_executable(DS_Tree main.cpp tree_node.hpp binary_tree.hpp express_tree.hpp expression_calculate.h expression_calculate.cpp)
