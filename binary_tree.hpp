@@ -2,12 +2,12 @@
 #define DS_TREE_BINARY_TREE_HPP
 
 #include "tree_node.hpp"
-#include <ostream>
+#include <iostream>
 #include <queue>
 
 template <typename T>
 class BinaryTree : public TreeNode<T> {
-private:
+protected:
 	TreeNode<T> *root_node;
 	int max(int a, int b);
 public:
@@ -64,7 +64,7 @@ void BinaryTree<T>::pre_order(TreeNode<T>* t) {
 	if (t == nullptr)
 		return;
 	else {
-		std::cout << t->get_data() << std::endl;
+		std::cout << t->get_data() << " ";
 		pre_order(t->left_child());
 		pre_order(t->right_child());
 	}
@@ -77,7 +77,7 @@ void BinaryTree<T>::in_order(TreeNode<T>* t) {
 		return;
 	else {
 		in_order(t->left_child());
-		std::cout << t->get_data() << std::endl;
+		std::cout << t->get_data() << " ";
 		in_order(t->right_child());
 	}
 }
@@ -89,7 +89,7 @@ void BinaryTree<T>::post_order(TreeNode<T>* t) {
 	else {
 		post_order(t->left_child());
 		post_order(t->right_child());
-		std::cout << t->get_data() << std::endl;
+		std::cout << t->get_data() << " ";
 	}
 }
 

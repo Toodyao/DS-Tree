@@ -1,20 +1,23 @@
 #ifndef DS_TREE_BINARY_SEARCH_TREE_H
 #define DS_TREE_BINARY_SEARCH_TREE_H
 
-#include "tree_node.hpp"
+#include "binary_tree.hpp"
 
-class BinarySearchTree {
+class BinarySearchTree : public BinaryTree<int> {
 private:
 	typedef TreeNode<int> TN;
-	TN *root;
-	BinarySearchTree::TN *find_min_recursion(TN *node);
-	BinarySearchTree::TN *find_max_recursion(TN *node);
+//	TN *root_node;
+	TN *find_min_recursion(TN *node);
+	TN *find_max_recursion(TN *node);
+
+	TN *insert_recursion(int n, TN *node);
+	TN *del_recursion(int n, TN *node);
 public:
 	BinarySearchTree ();
 	void insert(int n);
 	void del(int n);
-	BinarySearchTree::TN *find_min();
-	BinarySearchTree::TN *find_max();
+	TN *find_min();
+	TN *find_max();
 
 };
 
