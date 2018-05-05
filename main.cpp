@@ -21,6 +21,8 @@ int main() {
 	et.print_like_tree();
 
 //	cout << bt.get_tree_height(exp_tree_root) << endl;
+	cout << "\n-----BST TEST------\n";
+
 
 
 
