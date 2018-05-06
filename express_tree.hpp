@@ -6,7 +6,7 @@
 template<typename T>
 class ExpressTree : public BinaryTree<T> {
 private:
-	TreeNode<T> *exp_tree_node;
+	TreeNode<T> *&exp_tree_node = BinaryTree<T>::root_node;
 public:
 	ExpressTree();
 	explicit ExpressTree(TreeNode<T> * root);
