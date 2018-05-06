@@ -14,6 +14,10 @@ public:
 	explicit ExpressTree(BinaryTree<T> * root);
 	~ExpressTree();
 
+	void reconstruct(TreeNode<T> * root) {
+		exp_tree_node = root;
+	}
+
 	void print_like_tree();
 
 	std::queue<std::pair<TreeNode<T> *, int>> to_full_binary_tree(TreeNode<T> *root);
