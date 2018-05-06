@@ -2,6 +2,7 @@
 #define DS_TREE_EXPRESS_TREE_HPP
 
 #include "binary_tree.hpp"
+#include "expression_calculate.h"
 
 template<typename T>
 class ExpressTree : public BinaryTree<T> {
@@ -16,6 +17,8 @@ public:
 	void print_like_tree();
 
 	std::queue<std::pair<TreeNode<T> *, int>> to_full_binary_tree(TreeNode<T> *root);
+
+	void in_order(TreeNode<T>* t);
 };
 
 template<typename T>
@@ -94,6 +97,30 @@ std::queue<std::pair<TreeNode<T> *, int> > ExpressTree<T>::to_full_binary_tree(T
 		q.push(P(temp.first->right_child(), temp.second+1));
 	}
 	return ans;
+}
+
+
+template<typename T>
+void ExpressTree<T>::in_order(TreeNode<T>* t) {
+	if (t == nullptr)
+		return;
+	else {
+		bool brackets_flag = false; // whether to print brackets
+		char op1 = t->get_data()[0];
+		char op2 = 0;
+		if (t->left_child() != nullptr)
+			op2 = t->left_child()->get_data()[0];
+		if (is_op(op1) && (priority(op1) > priority(op2)))
+			brackets_flag = true;
+
+		if (brackets_flag)
+			std::cout << "(";
+		in_order(t->left_child());
+		if (brackets_flag)
+			std::cout << ")";
+		std::cout << t->get_data() << " ";
+		in_order(t->right_child());
+	}
 }
 
 #endif //DS_TREE_EXPRESS_TREE_HPP
