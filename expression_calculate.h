@@ -2,6 +2,7 @@
 #define DS_TREE_EXPRESSION_CALCULATE_H
 
 #include <string>
+#include <stack>
 #include "tree_node.hpp"
 
 bool is_digit(char c);
@@ -11,6 +12,7 @@ int priority(char c);
 double read_number(const std::string &s, size_t &i);
 
 std::string infix_to_suffix(const std::string &s);
+void prefix_to_infix(std::stack<char> &s, std::string &str);
 
 double cal_single(const double &a, const double &b, const char &op);
 double cal_suffix(const std::string &s);

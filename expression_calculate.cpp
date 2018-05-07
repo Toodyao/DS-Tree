@@ -105,6 +105,35 @@ string infix_to_suffix(const string &s) {
 	return num;
 }
 
+void prefix_to_infix(stack<char> &s, string &str) {
+	char temp;
+	while (1) {
+		temp = s.top();
+		s.pop();
+		if (temp != ' ')
+			break;
+	}
+
+	if (is_op(temp)) {
+		str.append("(");
+		prefix_to_infix(s, str);
+		str.append(1, temp);
+		prefix_to_infix(s, str);
+		str.append(")");
+	}
+	else if (is_digit(temp)){
+		while (1) {
+			str.append(std::to_string(temp-'0'));
+			if (!s.empty() && is_digit(s.top())) {
+				temp = s.top();
+				s.pop();
+			} else {
+				break;
+			}
+		}
+	}
+}
+
 double cal_single(const double &a, const double &b, const char &op) {
 	if (op == '+')
 		return a + b;
