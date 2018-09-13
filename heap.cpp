@@ -41,7 +41,7 @@ void heap::push(int x) {
 	if (heap_size > v.size())
 		std::cout << "heap full" << std::endl;
 	int i = heap_size; // add to the last
-	while (i > 0 && x > v[(i-1)/2]) { // swap up
+	while (i > 0 && (*cmp)(x, v[(i-1)/2])) { // swap up
 		v[i] = v[(i-1)/2];
 		i = (i-1)/2;
 	}
@@ -53,7 +53,7 @@ void heap::pop() {
 	// a little difference with percolate_down()
 	int n = heap_size;
 	int x = v[n-1]; // store the last element
-	v[0]  = v[n-1]; // lift the last element to the top
+	v[0]  = v[n-1]; // promote the last element to the top
 	int parent, child;
 	for (parent = 0; parent * 2 + 1 <= n - 1; parent = child) {
 		child = parent*2+1;      // default left child
