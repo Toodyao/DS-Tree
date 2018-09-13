@@ -27,6 +27,26 @@ public:
 	int get_tree_height(TreeNode<T> *);
 
 	void delete_subtree(TreeNode<T> *t);
+
+	TreeNode<T>* get_left() {
+		return root_node->lchild;
+	}
+	TreeNode<T>* get_right() {
+		return root_node->rchild;
+	}
+
+	void add_left(TreeNode<T> *t) {
+		root_node->lchild = t;
+	}
+	void add_right(TreeNode<T> *t) {
+		root_node->rchild = t;
+	}
+	void add_left(T d) {
+		root_node->lchild = new TreeNode<int>(d);
+	}
+	void add_right(T d) {
+		root_node->rchild = new TreeNode<int>(d);
+	}
 };
 
 template<typename T>
