@@ -1,49 +1,51 @@
 #ifndef DS_TREE_TREE_NODE_HPP
 #define DS_TREE_TREE_NODE_HPP
 
-template <typename T>
+template<typename T>
 class TreeNode {
 public:
 	T _data;
-	TreeNode<T> *lchild;
-	TreeNode<T> *rchild;
-	TreeNode<T> *parent;
+	TreeNode<T>* lchild;
+	TreeNode<T>* rchild;
+	TreeNode<T>* parent;
 
 	TreeNode();
 	explicit TreeNode(T d);
-	TreeNode(T d, TreeNode<T> *l, TreeNode<T> *r);
-	TreeNode(T d, TreeNode<T> *l, TreeNode<T> *r, TreeNode<T> *p);
+	TreeNode(T d, TreeNode<T>* l, TreeNode<T>* r);
+	TreeNode(T d, TreeNode<T>* l, TreeNode<T>* r, TreeNode<T>* p);
 
 	virtual ~TreeNode();
 
 //	inline TreeNode<T> *root();
-	inline TreeNode<T> * left_child();
-	inline TreeNode<T> * right_child();
+	inline TreeNode<T>* left_child_pointer();
+	inline TreeNode<T>* right_child_pointer();
+	inline TreeNode<T>& left_child();
+	inline TreeNode<T>& right_child();
 
-	virtual inline void add_left(TreeNode<T> *t);
-	virtual inline void add_right(TreeNode<T> *t);
-	virtual inline void add_left(T d);
-	virtual inline void add_right(T d);
+	virtual inline TreeNode<T>& add_left(TreeNode<T>* t);
+	virtual inline TreeNode<T>& add_right(TreeNode<T>* t);
+	virtual inline TreeNode<T>& add_left(T d);
+	virtual inline TreeNode<T>& add_right(T d);
 
-	inline T get_data();
+	inline T data();
 	inline void set_data(T d);
 };
 
 template<typename T>
 TreeNode<T>::TreeNode() :
-		lchild(nullptr), rchild(nullptr), parent(nullptr) { }
+		lchild(nullptr), rchild(nullptr), parent(nullptr) {}
 
 template<typename T>
 TreeNode<T>::TreeNode(T d) :
-		_data(d), lchild(nullptr), rchild(nullptr), parent(nullptr) { }
+		_data(d), lchild(nullptr), rchild(nullptr), parent(nullptr) {}
 
 template<typename T>
-TreeNode<T>::TreeNode(T d, TreeNode<T> *l, TreeNode<T> *r) :
-		_data(d), lchild(l), rchild(r), parent(nullptr) { }
+TreeNode<T>::TreeNode(T d, TreeNode<T>* l, TreeNode<T>* r) :
+		_data(d), lchild(l), rchild(r), parent(nullptr) {}
 
 template<typename T>
-TreeNode<T>::TreeNode(T d, TreeNode<T> *l, TreeNode<T> *r, TreeNode<T> *p) :
-		_data(d), lchild(l), rchild(r), parent(p) { }
+TreeNode<T>::TreeNode(T d, TreeNode<T>* l, TreeNode<T>* r, TreeNode<T>* p) :
+		_data(d), lchild(l), rchild(r), parent(p) {}
 
 template<typename T>
 TreeNode<T>::~TreeNode() {
@@ -51,17 +53,27 @@ TreeNode<T>::~TreeNode() {
 }
 
 template<typename T>
-TreeNode<T> * TreeNode<T>::left_child() {
+TreeNode<T>* TreeNode<T>::left_child_pointer() {
 	return lchild;
 }
 
 template<typename T>
-TreeNode<T> * TreeNode<T>::right_child() {
+TreeNode<T>* TreeNode<T>::right_child_pointer() {
 	return rchild;
 }
 
 template<typename T>
-T TreeNode<T>::get_data() {
+TreeNode<T>& TreeNode<T>::left_child() {
+	return *lchild;
+}
+
+template<typename T>
+TreeNode<T>& TreeNode<T>::right_child() {
+	return *rchild;
+}
+
+template<typename T>
+T TreeNode<T>::data() {
 	return _data;
 }
 
@@ -71,23 +83,27 @@ void TreeNode<T>::set_data(T d) {
 }
 
 template<typename T>
-void TreeNode<T>::add_left(TreeNode<T> *t) {
+TreeNode<T>& TreeNode<T>::add_left(TreeNode<T>* t) {
 	lchild = t;
+	return *t;
 }
 
 template<typename T>
-void TreeNode<T>::add_right(TreeNode<T> *t) {
+TreeNode<T>& TreeNode<T>::add_right(TreeNode<T>* t) {
 	rchild = t;
+	return *t;
 }
 
 template<typename T>
-void TreeNode<T>::add_left(T d) {
+TreeNode<T>& TreeNode<T>::add_left(T d) {
 	lchild = new TreeNode(d);
+	return *lchild;
 }
 
 template<typename T>
-void TreeNode<T>::add_right(T d) {
+TreeNode<T>& TreeNode<T>::add_right(T d) {
 	rchild = new TreeNode(d);
+	return *rchild;
 }
 
 

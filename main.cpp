@@ -29,13 +29,13 @@ int main() {
 	et.print_like_tree();
 	cout << endl;
 	cout << "prefix: ";
-	et.pre_order(et.root());
+	et.pre_order_recursion(et.root());
 	cout << endl;
 	cout << "infix: ";
 	et.in_order(et.root());
 	cout << endl;
 	cout << "suffix:";
-	et.post_order(et.root());
+	et.post_order_recursion(et.root());
 	cout << endl;
 
 	cout << "-----------------------" << endl;
@@ -56,13 +56,13 @@ int main() {
 	et.print_like_tree();
 	cout << endl;
 	cout << "prefix: ";
-	et.pre_order(et.root());
+	et.pre_order_recursion(et.root());
 	cout << endl;
 	cout << "infix: ";
 	et.in_order(et.root());
 	cout << endl;
 	cout << "suffix: ";
-	et.post_order(et.root());
+	et.post_order_recursion(et.root());
 	cout << endl;
 
 
@@ -76,11 +76,11 @@ int main() {
 	cout << "level order: " << endl;
 	bst.level_order();
 	cout << "pre order: " << endl;
-	bst.pre_order(bst.root());
+	bst.pre_order_recursion(bst.root());
 	cout << "\nin order: " << endl;
-	bst.in_order(bst.root());
+	bst.in_order_recursion(bst.root());
 	cout << "\npost order: " << endl;
-	bst.post_order(bst.root());
+	bst.post_order_recursion(bst.root());
 	cout << endl;
 
 
