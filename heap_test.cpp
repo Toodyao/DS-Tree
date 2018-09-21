@@ -1,7 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
-#include "heap.hpp"
+#include "Heap.hpp"
 using namespace std;
 
 int main() {
@@ -10,7 +10,7 @@ int main() {
 //	for (int i = 0; i < n; i++) {
 //		v.push_back(i);
 //	}
-	heap<int> h(n, new MyGreater<int>);
+	Heap<int> h(new MyGreater<int>);
 	for (int i = 0; i < n; i++) {
 		h.push(i);
 	}

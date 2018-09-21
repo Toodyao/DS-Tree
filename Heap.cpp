@@ -1,13 +1,13 @@
 #include "heap.h"
 #include "compare.hpp"
 
-heap::heap(int n, Compare<int> *cmp_t) {
+Heap::Heap(int n, Compare<int> *cmp_t) {
 	heap_size = 0;
 	v.resize((unsigned int)n);
 	cmp = cmp_t;
 }
 
-heap::heap(vector<int> a, Compare<int> *cmp_t) {
+Heap::Heap(vector<int> a, Compare<int> *cmp_t) {
 	// create heap using existing array
 	int n = (int)a.size();
 	v.resize((unsigned int)n);
@@ -25,19 +25,19 @@ heap::heap(vector<int> a, Compare<int> *cmp_t) {
 
 }
 
-bool heap::empty() {
+bool Heap::empty() {
 	return (bool)heap_size;
 }
 
-int heap::size() {
+int Heap::size() {
 	return heap_size;
 }
 
-int heap::top() {
+int Heap::top() {
 	return v[0];
 }
 
-void heap::push(int x) {
+void Heap::push(int x) {
 	if (heap_size > v.size())
 		std::cout << "heap full" << std::endl;
 	int i = heap_size; // add to the last
@@ -49,7 +49,7 @@ void heap::push(int x) {
 	heap_size++;
 }
 
-void heap::pop() {
+void Heap::pop() {
 	// a little difference with percolate_down()
 	int n = heap_size;
 	int x = v[n-1]; // store the last element
@@ -73,7 +73,7 @@ void heap::pop() {
 	heap_size--;
 }
 
-void heap::percolate_down(int i) {
+void Heap::percolate_down(int i) {
 	int n = heap_size;
 	int x = v[i]; // store current element
 //	v[i] = v[n-1];

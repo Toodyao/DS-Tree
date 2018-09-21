@@ -7,17 +7,17 @@
 
 using std::vector;
 
-class heap {
+class Heap {
 private:
 	vector<int> v;
 	int heap_size;
 	Compare<int> *cmp;
 	void percolate_down(int i);
 public:
-//	heap()
-	heap(int n, Compare<int> *cmp_t = new MyLess<int>);
-	heap(vector<int> a, Compare<int> *cmp_t = new MyLess<int>);
-//	~heap();
+//	Heap()
+	Heap(int n, Compare<int> *cmp_t = new MyLess<int>);
+	Heap(vector<int> a, Compare<int> *cmp_t = new MyLess<int>);
+//	Heap();
 	bool empty();
 	int size();
 	int top();
